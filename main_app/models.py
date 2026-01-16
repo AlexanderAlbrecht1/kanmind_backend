@@ -12,3 +12,11 @@ class Board(models.Model):
         return self.name
 
 class Task(models.Model):
+    board = models.models.PositiveIntegerField()
+    title = models.CharField(max_length=200)
+    description = models.TextField()
+    status = models.CharField(max_length=50)
+    priority = models.CharField(max_length=50)
+    assignee_id = models.PositiveIntegerField(null=True, blank=True)
+    reviewer_id = models.PositiveIntegerField(null=True, blank=True)
+    due_date = models.DateField(null=True, blank=True)
