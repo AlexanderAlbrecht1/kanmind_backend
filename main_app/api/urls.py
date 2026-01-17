@@ -1,7 +1,8 @@
 
 from django.urls import path
-from .views import single_board_view
+from .views import boards_view
 
 urlpatterns = [
-    path('', single_board_view, name='single_board'),
+    path('', boards_view, name='boards_view'),
+    path('<int:board_id>/', boards_view, name='boards_view'),
 ]
