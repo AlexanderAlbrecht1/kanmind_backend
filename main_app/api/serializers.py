@@ -13,3 +13,13 @@ class BoardSerializer(serializers.Serializer):
 
     def create(self, validated_data):
         return Board.objects.create(**validated_data)
+    
+    def update(self, instance, validated_data):
+        instance.title = validated_data.get('title', instance.title)
+        instance.member_count = validated_data.get('member_count', instance.member_count)
+        instance.ticket_count = validated_data.get('ticket_count', instance.ticket_count)
+        instance.tasks_to_do_count = validated_data.get('tasks_to_do_count', instance.tasks_to_do_count)
+        instance.tasks_high_prio_count = validated_data.get('tasks_high_prio_count', instance.tasks_high_prio_count)
+        instance.owner_id = validated_data.get('owner_id', instance.owner_id)
+        instance.save()
+        return instance
