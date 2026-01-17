@@ -18,3 +18,17 @@ def boards_view(request):
             return Response(serializer.data, status=201)
         else:
             return Response(serializer.errors, status=400)
+
+@api_view(['GET','DELETE'])
+def single_board_view(request, board_id):
+
+    if request.method == 'GET':
+        board = Board.objects.get(id=board_id)
+        serializer = BoardSerializer(board)
+        return Response({"board": serializer.data})
+    
+    if request.method == 'DELETE':
+        board = Board.objects.get(id=board_id)
+        serializer = BoardSerializer(board)
+        board.delete()
+        return Response({"board": serializer.data})
