@@ -23,3 +23,4 @@ class BoardSerializer(serializers.Serializer):
         instance.owner_id = validated_data.get('owner_id', instance.owner_id)
         instance.save()
         return instance
+
