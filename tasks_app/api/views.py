@@ -19,3 +19,26 @@ def tasks_view(request):
             return Response(serializer.data, status=201)
         else:
             return Response(serializer.errors, status=400)
+        
+@api_view(['GET','DELETE', 'PUT'])
+def single_task_view(request, task_id):
+
+    if request.method == 'GET':
+        task = Task.objects.get(id=task_id)
+        serializer = TaskSerializer(task)
+        return Response({"task": serializer.data})
+    
+    if request.method == 'PUT':
+        task = Task.objects.get(id=task_id)
+        serializer = TaskSerializer(task, data=request.data, partial = True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=200)
+        else:
+            return Response(serializer.errors, status=400)
+
+    if request.method == 'DELETE':
+        board = Task.objects.get(id=board_id)
+        serializer = TaskSerializer(board)
+        board.delete()
+        return Response({"board": serializer.data})
