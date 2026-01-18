@@ -38,7 +38,7 @@ def single_task_view(request, task_id):
             return Response(serializer.errors, status=400)
 
     if request.method == 'DELETE':
-        board = Task.objects.get(id=board_id)
-        serializer = TaskSerializer(board)
-        board.delete()
-        return Response({"board": serializer.data})
+        task = Task.objects.get(id=task_id)
+        serializer = TaskSerializer(task)
+        task.delete()
+        return Response({"task": serializer.data})
